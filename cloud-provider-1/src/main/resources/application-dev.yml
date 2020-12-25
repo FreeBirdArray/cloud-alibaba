@@ -1,0 +1,19 @@
+server:
+  port: 9092
+spring:
+  application:
+    name: cloud-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.61.146.178:8848
+management:
+  endpoint:
+    auditevents:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

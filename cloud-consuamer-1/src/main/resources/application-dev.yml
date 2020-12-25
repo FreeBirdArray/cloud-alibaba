@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: cloud-consumer
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.61.146.178:8848
+
+management:
+  endpoint:
+    nacos-discovery:
+      enabled: true
+
