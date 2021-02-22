@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/config")
 //开启配置自动更新
-
+@RefreshScope
 public class ConfigController {
     @Value("${config.info}")
     private String configInfo;

@@ -26,6 +26,7 @@
         <spring.boot-version>2.2.3.RELEASE</spring.boot-version>
         <spring.cloud.alibaba.nacos-version>2.2.1.RELEASE</spring.cloud.alibaba.nacos-version>
         <spring.cloud.alibaba-version>2.2.1.RELEASE</spring.cloud.alibaba-version>
+        <spring.cloud.openfeign-version>2.2.1.RELEASE</spring.cloud.openfeign-version>
     </properties>
 
     <dependencyManagement>

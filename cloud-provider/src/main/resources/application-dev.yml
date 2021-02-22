@@ -7,10 +7,10 @@ spring:
     nacos:
       discovery:
         server-addr: 182.61.146.178:8848
-          #指定分组
-          group: DEV_GRUP
-          #指定命名空间
-          namespace: 0e5016ac-14da-4f83-bef3-9532328483c1
+        #指定分组
+        group: DEV_GROUP
+        #指定命名空间
+        namespace: 7a7bbf66-9d2f-4c2d-9586-6720d09ff155
 management:
   endpoints:
     web:
