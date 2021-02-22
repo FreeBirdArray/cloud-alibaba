@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 182.61.146.178:8848
+        file-extension: yaml
+        #以组进行配置管理
+        group: DEV_GROUP
+        #以命名空间进行配置管理
+        namespace: 0e5016ac-14da-4f83-bef3-9532328483c1

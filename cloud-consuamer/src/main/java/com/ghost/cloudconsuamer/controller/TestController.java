@@ -35,7 +35,7 @@ public class TestController {
 
     @GetMapping("/echo/app-name")
     public String echoAppName(){
-        //使用 LoadBalanceClient 和 RestTemolate 结合的方式来访问
+        //使用 LoadBalanceClient 和 RestTemplate 结合的方式来访问
         ServiceInstance serviceInstance = loadBalancerClient.choose("cloud-provider");
         String url = String.format("http://%s:%s/test/echo/%s",serviceInstance.getHost(),serviceInstance.getPort(),appName);
         System.out.println("request url:"+url);

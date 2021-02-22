@@ -7,10 +7,17 @@ spring:
     nacos:
       discovery:
         server-addr: 182.61.146.178:8848
+          #指定分组
+          group: DEV_GRUP
+          #指定命名空间
+          namespace: 0e5016ac-14da-4f83-bef3-9532328483c1
 management:
   endpoints:
     web:
       exposure:
         include: '*'
-
-
+config:
+  info: why
+logging:
+  level:
+    com.alibaba.nacos.client.config.impl: WARN    #静止心跳检测日志打印
