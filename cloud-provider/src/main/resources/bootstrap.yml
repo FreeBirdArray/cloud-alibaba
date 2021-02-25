@@ -2,9 +2,11 @@ spring:
   cloud:
     nacos:
       config:
+        #配置中心地址
         server-addr: 182.61.146.178:8848
+        #指定配置文件类型，配置文件类型支持 properties 和 yaml 两种类型
         file-extension: yaml
         #以组进行配置管理
         group: DEV_GROUP
         #以命名空间进行配置管理
-        namespace: 7a7bbf66-9d2f-4c2d-9586-6720d09ff155
+        namespace: f170aba7-4087-441c-a8c0-8c2b46415bb0

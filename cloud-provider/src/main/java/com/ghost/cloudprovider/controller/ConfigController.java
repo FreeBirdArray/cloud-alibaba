@@ -1,10 +1,15 @@
 package com.ghost.cloudprovider.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.ghost.cloudprovider.handler.BlockHandler;
+import com.ghost.cloudprovider.service.TestServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @Company 北京卡尔卡拉科技股份有限公司
@@ -15,14 +20,33 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/config")
-//开启配置自动更新
-@RefreshScope
 public class ConfigController {
-    @Value("${config.info}")
-    private String configInfo;
 
+
+    @Resource
+    private TestServiceImpl testService;
+
+
+
+    /** 当 blockHandler 函数与方法在同一个包时只需要 blockHandler 参数，该参数的值就是 blockHandler 函数名字
+     *  当 blockHandler 函数和方法不再同一个包时，需要 blockHandlerClass 参数和 blockHandler 配合使用，
+     *  blockHandlerClass 值为 blockHandler 函数所在类的Class对象，blockHandler 值为 blockHandler函数名字
+     *  1. blockHandler 函数访问修饰符应为 public
+     *  2. blockHandler 函数的参数应该和被处理方法一致并且在最后还要加上 BlockException ex 作为参数
+     *  3. blockHandler 函数返回值应与被处理方法一致
+     *  4. blockHandler 函数与被处理方法不再一个包时应该为 static 函数
+     */
     @GetMapping("/info")
+    @SentinelResource(value = "info",blockHandlerClass = BlockHandler.class,blockHandler = "blockHandlerForGetInfo")
     public String getConfigInfo() {
-        return configInfo;
+        return testService.getConfigInfo();
     }
+
+    @GetMapping("/info1")
+    public String getConfigInfo1() {
+        return testService.getConfigInfo();
+    }
+
+
+
 }

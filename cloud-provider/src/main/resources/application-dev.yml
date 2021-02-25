@@ -5,19 +5,34 @@ spring:
     name: cloud-provider
   cloud:
     nacos:
+      #服务注册及服务发现
       discovery:
         server-addr: 182.61.146.178:8848
         #指定分组
         group: DEV_GROUP
         #指定命名空间
-        namespace: 7a7bbf66-9d2f-4c2d-9586-6720d09ff155
+        namespace: f170aba7-4087-441c-a8c0-8c2b46415bb0
+
+
+    sentinel:
+      transport:
+        #sentinel dashboard 运行服务的ip及端口
+        dashboard: 192.168.1.220:9527
+        #该微服务应用运行的服务器ip
+        clientIp: 192.168.3.189
+        #用于在微服务运行时和sentinel交换监控信息的端口
+        port: 8719
+
+
+
 management:
   endpoints:
     web:
       exposure:
         include: '*'
 config:
-  info: why
+  info: why is
 logging:
   level:
-    com.alibaba.nacos.client.config.impl: WARN    #静止心跳检测日志打印
+    #静止心跳检测日志打印
+    com.alibaba.nacos.client.config.impl: WARN
