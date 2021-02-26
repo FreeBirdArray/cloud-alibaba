@@ -1,6 +1,7 @@
 package com.ghost.cloudprovider.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.ghost.cloudprovider.fallback.FallBackHandler;
 import com.ghost.cloudprovider.handler.BlockHandler;
 import com.ghost.cloudprovider.service.TestServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,13 +38,14 @@ public class ConfigController {
      *  4. blockHandler 函数与被处理方法不再一个包时应该为 static 函数
      */
     @GetMapping("/info")
-    @SentinelResource(value = "info",blockHandlerClass = BlockHandler.class,blockHandler = "blockHandlerForGetInfo")
-    public String getConfigInfo() {
+    @SentinelResource(value = "info",blockHandlerClass = {BlockHandler.class},blockHandler = "blockHandlerForGetInfo",
+            fallbackClass = {FallBackHandler.class},fallback = "fallBackForGetInfo")
+    public String getConfigInfo() throws Exception {
         return testService.getConfigInfo();
     }
 
     @GetMapping("/info1")
-    public String getConfigInfo1() {
+    public String getConfigInfo1() throws Exception {
         return testService.getConfigInfo();
     }
 

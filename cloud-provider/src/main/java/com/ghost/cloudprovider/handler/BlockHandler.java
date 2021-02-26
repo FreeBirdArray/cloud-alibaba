@@ -13,6 +13,7 @@ public class BlockHandler {
 
     // blockHandler 函数，当原方法调用被限流、降级、系统保护的时候调用
     public static String blockHandlerForGetInfo(BlockException ex){
+        System.out.println("qps太高啦");
         return "qps太高啦";
     }
 }
