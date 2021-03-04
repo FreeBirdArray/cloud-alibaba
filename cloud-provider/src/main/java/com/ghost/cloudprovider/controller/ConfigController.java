@@ -4,13 +4,10 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.ghost.cloudprovider.fallback.FallBackHandler;
 import com.ghost.cloudprovider.handler.BlockHandler;
 import com.ghost.cloudprovider.service.TestServiceImpl;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * @Company 北京卡尔卡拉科技股份有限公司
@@ -47,6 +44,15 @@ public class ConfigController {
     @GetMapping("/info1")
     public String getConfigInfo1() throws Exception {
         return testService.getConfigInfo();
+    }
+
+
+    @PostMapping("/uploadVideo.do")
+    public void upload(@Valid @ModelAttribute NakednessAudioUploadRequest request) {
+        System.out.println(request);
+        System.out.println("收到请求！");
+
+
     }
 
 

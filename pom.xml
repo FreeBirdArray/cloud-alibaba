@@ -15,6 +15,7 @@
         <module>cloud-consuamer-1</module>
         <module>cloud-provider</module>
         <module>cloud-provider-1</module>
+        <module>cloud-gateway</module>
     </modules>
 
 
@@ -27,6 +28,7 @@
         <spring.cloud.alibaba.nacos-version>2.2.1.RELEASE</spring.cloud.alibaba.nacos-version>
         <spring.cloud.alibaba-version>2.2.1.RELEASE</spring.cloud.alibaba-version>
         <spring.cloud.openfeign-version>2.2.1.RELEASE</spring.cloud.openfeign-version>
+        <spring.cloud.gateway-version>2.2.2.RELEASE</spring.cloud.gateway-version>
     </properties>
 
     <dependencyManagement>

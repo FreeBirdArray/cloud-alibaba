@@ -1,0 +1,58 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    nacos:
+      #服务注册及服务发现
+      discovery:
+        server-addr: 182.61.146.178:8848
+        #指定分组
+        group: DEV_GROUP
+        #指定命名空间
+        namespace: f170aba7-4087-441c-a8c0-8c2b46415bb0
+    sentinel:
+      transport:
+        #sentinel dashboard 运行服务的ip及端口
+        dashboard: 192.168.1.220:9527
+        #该微服务应用运行的服务器ip
+        clientIp: 192.168.3.189
+        #用于在微服务运行时和sentinel交换监控信息的端口
+        port: 8719
+    gateway:
+      discovery:
+        locator:
+          enabled: true  #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+
+      routes: #网关路由策略
+        - id: path_route
+          uri: lb://cloud-provider
+          predicates:
+            - Path=/config/**
+
+        - id: baiud_route
+          uri: http://cn.bing.com/?ensearch=1&FORM=BEHPTB
+          predicates:
+            - Path=/comfig
+
+
+
+
+
+
+
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+config:
+  info: why is
+logging:
+  level:
+    #静止心跳检测日志打印
+    com.alibaba.nacos.client.config.impl: WARN
