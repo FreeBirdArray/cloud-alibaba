@@ -1,19 +1,17 @@
 package com.example.cloudgateway.filter;
 
-import io.netty.buffer.ByteBufAllocator;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.core.io.buffer.NettyDataBufferFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicReference;
@@ -87,19 +85,38 @@ public class AbilityGlobalFilter implements GlobalFilter , Ordered {
         return str;
     }
 
-    private String getBodyContent(ServerHttpRequest exchange){
+ /*   private String getBodyContent(ServerHttpRequest exchange){
         Flux<DataBuffer> body = exchange.getBody();
        // Flux<DataBuffer> body = exchange.getRequest().getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();
         // 缓存读取的request body信息
         body.subscribe(dataBuffer -> {
             CharBuffer charBuffer = StandardCharsets.UTF_8.decode(dataBuffer.asByteBuffer());
-            DataBufferUtils.release(dataBuffer);
+          //  CharBuffer encode = StandardCharsets.UTF_8.encode(charBuffer.a);
+            //  DataBufferUtils.release(encode);
             bodyRef.set(charBuffer.toString());
         });
         //获取request body
         System.out.println(bodyRef.get());
         return bodyRef.get();
+    }*/
+
+
+    private String getBodyContent(ServerHttpRequest exchange){
+        Flux<DataBuffer> body = exchange.getBody();
+        // Flux<DataBuffer> body = exchange.getRequest().getBody();
+       // AtomicReference<String> bodyRef = new AtomicReference<>();
+        StringBuilder sb = new StringBuilder();
+        // 缓存读取的request body信息
+        body.subscribe(dataBuffer -> {
+            byte[] bytes = new byte[dataBuffer.readableByteCount()];
+            dataBuffer.read(bytes);
+            // DataBufferUtils.release(buffer);
+            String bodyString = new String(bytes, StandardCharsets.UTF_8);
+            sb.append(bodyString);
+        });
+        System.out.println(sb.toString());
+        return formatStr(sb.toString());
     }
     /**
      * 设置优先级
